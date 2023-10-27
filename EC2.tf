@@ -10,6 +10,6 @@ resource "aws_instance" "APP01" {
     #             nohup busybox httpd -f -p 8080 &
     #             OEF
     tags = {
-        Name = "APP-01"
+        Name = "terraform ansible python"
     }
 }
