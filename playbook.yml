@@ -4,6 +4,6 @@
     apt:
       pkg:
       - python3
-      - virutalenv
+      - python3-pip
       update_cache: yes
     become: yes
