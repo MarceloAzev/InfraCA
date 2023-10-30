@@ -13,6 +13,6 @@ variable "key-name"{
 
 variable "cdirs_acesso_remoto"{
     type = list
-    default = ["179.83.80.34/32"]
+    default = ["187.112.141.4/32"]
 
 }
