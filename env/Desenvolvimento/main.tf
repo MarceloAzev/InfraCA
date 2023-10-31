@@ -1,4 +1,3 @@
-
 module "aws-dev"{
     source = "../../infra"
     instancia_tipo = "t2.micro"

@@ -26,9 +26,14 @@
       name:
         - django
         - djangorestframework
+  - name: 'verificando se o prjeto existe'
+    stat:
+      path: /home/ubuntu/venv/setup/settings.py
+    register: projeto
   - name: 'Iniciando projeto django'
     shell: 'sudo chown -R $USER /home'
     shell: '. /home/ubuntu/venv/venv/bin/activate; django-admin startproject setup /home/ubuntu/venv'
+    when: not projeto.stat.exists
   - name: 'Setup modificando a configuração do Host'
     lineinfile:
       path: /home/ubuntu/venv/setup/settings.py
