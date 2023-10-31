@@ -2,7 +2,7 @@
 resource "aws_vpc" "terraform-estudo" {
   cidr_block       = "10.0.0.0/16"
   tags = {
-    Name = "iac-estudo"
+    Name = var.name_vpc
   }
 }
 #-----------------------VPC-----------------------
@@ -12,7 +12,7 @@ resource "aws_internet_gateway" "internet-acesso" {
   vpc_id = aws_vpc.terraform-estudo.id
 
   tags = {
-    Name = "internet"
+    Name = var.name_ig
   }
 }
 #-----------------------internet gateway-----------------------
@@ -22,7 +22,7 @@ resource "aws_subnet" "subnet-a" {
   cidr_block = "10.0.1.0/24"
 
   tags = {
-    Name = "subnet-a"
+    Name = var.name_sbnt
   } 
 }
 #-----------------------SUBNET-----------------------
@@ -36,11 +36,8 @@ resource "aws_route_table" "route-public-a" {
     gateway_id = aws_internet_gateway.internet-acesso.id
   }
   tags = {
-    Name = "route-public"
+    Name = var.name_route
   }
-  depends_on = [
-    aws_internet_gateway.internet-acesso
-  ]
 }
 #-----------------------route table-----------------------
 
@@ -99,15 +96,15 @@ resource "aws_network_acl" "terraform-acl" {
   }
 
   tags = {
-    Name = "terraform-acl"
+    Name = var.name_acl
   }
 }
 #-----------------------acl-----------------------
 
 #-----------------------Security Group------------------------------
 resource "aws_security_group" "acesso_ssh" {
-  name        = "acesso_ssh"
-  description = "acesso_ssh"
+  name        = var.name_sg
+  description = var.name_sg
 
   ingress {
     description      = "SSH port"
@@ -169,7 +166,7 @@ resource "aws_security_group" "acesso_ssh" {
   
 
   tags = {
-    Name = "ssh e web-serve port"
+    Name = var.name_sg
   }
 }
 # -----------------------Security Group-----------------------

@@ -5,6 +5,12 @@ module "aws-dev"{
     chave = "iac-estudo"
     amis = "ami-0fc5d935ebf8bc3bc"
     instancia_name = "Dev01"
+    name_vpc = "dev-vpc"
+    name_ig = "dev-ig"      
+    name_sbnt = "dev-sbnt"  
+    name_route = "dev-route"
+    name_acl = "dev-acl"
+    name_sg = "dev-sg"
 }
 output "IP"{
     value = module.aws-dev.IP_publico
