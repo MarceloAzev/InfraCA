@@ -11,11 +11,11 @@
       - python3
       - python3-pip
       update_cache: yes
-  -name: 'git Clone'
+  - name: 'git Clone'
     ansible.builtin.git:
-    repo: https://github.com/alura-cursos/clientes-leo-api
-    dest: /home/ubuntu/venv
-    version: master
+      repo: https://github.com/alura-cursos/clientes-leo-api
+      dest: /home/ubuntu/venv
+      version: master
   - name: Create app folder
     file:
       name: /opt/pythonapp
