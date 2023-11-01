@@ -41,4 +41,4 @@
   - name: dados iniciais do DB
     shell: '. /home/ubuntu/venv/venv/bin/activate; python /home/ubuntu/venv/manage.py loaddata clientes.json'
   - name: 'inciando servidor'
-    shell: '. /home/ubuntu/venv/venv/bin/activate; nohup python /home/ubuntu/venv/manage.py runserver 0.0.0.0:8080 &
+    shell: '. /home/ubuntu/venv/venv/bin/activate; nohup python /home/ubuntu/venv/manage.py runserver 0.0.0.0:8080 &'
