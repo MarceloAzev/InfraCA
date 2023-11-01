@@ -47,3 +47,15 @@ variable "name_acl"{
 variable "name_sg"{
     type = string
 }
+
+variable "name_escalonamento"{
+    type = string
+}
+
+variable "maximo"{
+    type = number
+}
+
+variable "minimo"{
+    type = number
+}

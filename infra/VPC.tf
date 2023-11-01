@@ -102,9 +102,8 @@ resource "aws_network_acl" "terraform-acl" {
 #-----------------------acl-----------------------
 
 #-----------------------Security Group------------------------------
-resource "aws_security_group" "acesso_ssh" {
+resource "aws_security_group" "acesso_geral" {
   name        = var.name_sg
-  description = var.name_sg
 
   ingress {
     description      = "SSH port"

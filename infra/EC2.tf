@@ -1,14 +1,15 @@
-#-----------------------------Instancia-----------------------------
-resource "aws_instance" "srv" {
-    ami           = var.amis
+#-----------------------------Template Instancia-----------------------------
+resource "aws_launch_template" "servidor" {
+    image_id = var.amis #mesma função do ami em instancia
     instance_type = var.instancia_tipo
     key_name = var.chave
-    vpc_security_group_ids = ["${aws_security_group.acesso_ssh.id}"]
+    security_group_names = [var.name_sg]
     tags = {
         Name = var.instancia_name
     }
+    user_data = filebase64("ansible.sh")
 }
-#-----------------------------Instancia-----------------------------
+#-----------------------------Template Instancia-----------------------------
 
 #-----------------------------Chave-----------------------------
 resource "aws_key_pair" "chaveSSH"{
@@ -17,7 +18,16 @@ resource "aws_key_pair" "chaveSSH"{
 }
 #-----------------------------Chave-----------------------------
 
-#-----------------------------output-----------------------------
-output "IP_publico"{
-    value = aws_instance.srv.public_ip
+#-----------------------------grupo de escalonamento-----------------------------
+
+resource "aws_autoscaling_group" "escalonamento"{
+    availability_zones = [ "${var.regiao_us_aws}a" ]
+    name = var.name_escalonamento
+    max_size = var.maximo
+    min_size = var.minimo
+    launch_template{
+        id = aws_launch_template.servidor.id
+        version = "$Latest"
+    }
 }
+#-----------------------------grupo de escalonamento-----------------------------

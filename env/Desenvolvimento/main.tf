@@ -11,7 +11,7 @@ module "aws-dev"{
     name_route = "dev-route"
     name_acl = "dev-acl"
     name_sg = "dev-sg"
-}
-output "IP"{
-    value = module.aws-dev.IP_publico
+    minimo = 0
+    maximo = 1
+    name_escalonamento = "Dev"
 }

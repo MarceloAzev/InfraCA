@@ -11,7 +11,7 @@ module "aws-prod"{
     name_route = "prod-route"
     name_acl = "prod-acl"
     name_sg = "prod-sg"
-}
-output "IP"{
-    value = module.aws-prod.IP_publico
+    minimo = 1
+    maximo = 10
+    name_escalonamento = "Prod"
 }
