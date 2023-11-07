@@ -32,6 +32,6 @@ resource "aws_autoscaling_group" "escalonamento"{
         id = aws_launch_template.servidor.id
         version = "$Latest"
     }
-    # target_group_arns = [aws_lb_target_group.alvoLoadBalance.arn]
+    target_group_arns = [aws_lb_target_group.alvoLoadBalance.arn]
 }
 #-----------------------------grupo de escalonamento-----------------------------

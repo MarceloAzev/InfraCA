@@ -41,29 +41,29 @@ resource "aws_subnet" "subnet-b" {
 #-----------------------SUBNET-----------------------
 
 #-----------------------Load Balance-----------------------
-# resource "aws_lb" "loadBalance"{
-#   internal = false
-#   subnets = [ aws_subnet.subnet-a.id, aws_subnet.subnet-b.id]
-#   security_groups = [aws_security_group.acesso_geral.id]
-# }
+resource "aws_lb" "loadBalance"{
+  internal = false
+  subnets = [ aws_subnet.subnet-a.id, aws_subnet.subnet-b.id]
+  security_groups = [aws_security_group.acesso_geral.id]
+}
 
-# resource "aws_lb_target_group" "alvoLoadBalance"{
-#   name = "destinoMaquina"
-#   port = "8080"
-#   protocol = "HTTP"
-#   vpc_id = aws_vpc.terraform-estudo.id
-# }
+resource "aws_lb_target_group" "alvoLoadBalance"{
+  name = "destinoMaquina"
+  port = "8080"
+  protocol = "HTTP"
+  vpc_id = aws_vpc.terraform-estudo.id
+}
 
-# resource "aws_lb_listener" "entradaLoadBalance"{
-#   load_balancer_arn = aws_lb.loadBalance.arn
-#   port = "8080"
-#   protocol = "HTTP"
-#   default_action{
-#     type = "forward"
-#     target_group_arn = aws_lb_target_group.alvoLoadBalance.arn
-#   }
+resource "aws_lb_listener" "entradaLoadBalance"{
+  load_balancer_arn = aws_lb.loadBalance.arn
+  port = "8080"
+  protocol = "HTTP"
+  default_action{
+    type = "forward"
+    target_group_arn = aws_lb_target_group.alvoLoadBalance.arn
+  }
 
-# }
+}
 #-----------------------Load Balance-----------------------
 
 
