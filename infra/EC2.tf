@@ -24,7 +24,7 @@ resource "aws_key_pair" "chaveSSH"{
 
 #-----------------------------grupo de escalonamento-----------------------------
 resource "aws_autoscaling_group" "escalonamento"{
-    vpc_zone_identifier = [ aws_subnet.subnet-a.id ]
+    vpc_zone_identifier = [ aws_subnet.subnet-a.id,aws_subnet.subnet-b.id ]
     name = var.name_escalonamento
     max_size = var.maximo
     min_size = var.minimo

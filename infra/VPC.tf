@@ -24,20 +24,20 @@ resource "aws_subnet" "subnet-a" {
   availability_zone = "us-east-1a"
 
   tags = {
-    Name = var.name_sbnt
+    Name = "${var.name_sbnt}-a"
   } 
 }
 
-# resource "aws_subnet" "subnet-b" {
-#   # availability_zones = [ "${var.regiao_us_aws}b"]
-#   vpc_id     = aws_vpc.terraform-estudo.id
-#   cidr_block = "10.0.2.0/24"
-#   availability_zone = "1b"
+resource "aws_subnet" "subnet-b" {
+  # availability_zones = [ "${var.regiao_us_aws}b"]
+  vpc_id     = aws_vpc.terraform-estudo.id
+  cidr_block = "10.0.2.0/24"
+  availability_zone = "us-east-1b"
 
-#   tags = {
-#     Name = "${var.name_sbnt}-b"
-#   } 
-# }
+  tags = {
+    Name = "${var.name_sbnt}-b"
+  } 
+}
 #-----------------------SUBNET-----------------------
 
 #-----------------------Load Balance-----------------------
