@@ -109,6 +109,14 @@ resource "aws_network_acl" "terraform-acl" {
     from_port  = 443
     to_port    = 443
   }
+  egress {
+    protocol   = "-1"
+    rule_no    = 400
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 0
+  }
 
   ingress {
     protocol   = "tcp"
@@ -133,6 +141,14 @@ resource "aws_network_acl" "terraform-acl" {
     cidr_block = "0.0.0.0/0"
     from_port  = 443
     to_port    = 443
+  }
+  ingress {
+    protocol   = "-1"
+    rule_no    = 400
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 0
   }
 
   tags = {
