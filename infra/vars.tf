@@ -11,7 +11,7 @@ variable "chave"{
 
 variable "cdirs_acesso_remoto"{
     type = list
-    default = ["187.112.141.4/32"]
+    default = ["177.41.208.72/32"]
 
 }
 
