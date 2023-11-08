@@ -59,3 +59,4 @@ variable "maximo"{
 variable "minimo"{
     type = number
 }
+

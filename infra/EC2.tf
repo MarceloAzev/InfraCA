@@ -22,7 +22,7 @@ resource "aws_key_pair" "chaveSSH"{
 }
 #-----------------------------Chave-----------------------------
 
-#-----------------------------grupo de escalonamento-----------------------------
+#-----------------------Load Balance-----------------------
 resource "aws_autoscaling_group" "escalonamento"{
     vpc_zone_identifier = [ aws_subnet.subnet-a.id,aws_subnet.subnet-b.id ]
     name = var.name_escalonamento
@@ -34,4 +34,40 @@ resource "aws_autoscaling_group" "escalonamento"{
     }
     target_group_arns = [aws_lb_target_group.alvoLoadBalance.arn]
 }
-#-----------------------------grupo de escalonamento-----------------------------
+
+resource "aws_lb" "loadBalance"{
+  internal = false
+  subnets = [ aws_subnet.subnet-a.id, aws_subnet.subnet-b.id]
+  security_groups = [aws_security_group.acesso_geral.id]
+}
+
+resource "aws_lb_target_group" "alvoLoadBalance"{
+  name = "destinoMaquina"
+  port = "8080"
+  protocol = "HTTP"
+  vpc_id = aws_vpc.terraform-estudo.id
+}
+
+resource "aws_lb_listener" "entradaLoadBalance"{
+  load_balancer_arn = aws_lb.loadBalance.arn
+  port = "8080"
+  protocol = "HTTP"
+  default_action{
+    type = "forward"
+    target_group_arn = aws_lb_target_group.alvoLoadBalance.arn
+  }
+
+}
+
+resource "aws_autoscaling_policy" "escalonamento"{
+    name = "terraform-escala"
+    autoscaling_group_name = var.name_escalonamento
+    policy_type = "TargetTrackingScaling"
+    target_tracking_configuration{
+        predefined_metric_specification{
+            predefined_metric_type = "ASGAverageCPUUtilization"
+        }
+        target_value = 50.0
+    }
+}
+#-----------------------Load Balance-----------------------
