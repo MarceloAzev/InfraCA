@@ -7,10 +7,6 @@ tee -a playbook.yml > /dev/null << EOT
 - hosts: localhost
   become: yes
   tasks:
-  - name: Download pip installer
-    get_url:
-      url: https://bootstrap.pypa.io/get-pip.py
-      dest: /tmp/get-pip.py
   - name: instalando o python3
     apt:
       pkg:
@@ -22,12 +18,7 @@ tee -a playbook.yml > /dev/null << EOT
       repo: https://github.com/alura-cursos/clientes-leo-api
       dest: /home/ubuntu/venv
       version: master
-      force: yes #forçar para que sempre sobrer por para nova versão
-  - name: Create app folder
-    file:
-      name: /opt/pythonapp
-      state: directory
-      recurse: yes
+      force: yes
   - name: Install virtualenv module
     pip:
       name: virtualenv
@@ -41,7 +32,7 @@ tee -a playbook.yml > /dev/null << EOT
       path: /home/ubuntu/venv/setup/settings.py
       regexp: 'ALLOWED_HOSTS'
       line: 'ALLOWED_HOSTS = ["*"]'
-      backrefs: yes
+      backrefs: yes
   - name: 'configurando o banco de dados'
     shell: '. /home/ubuntu/venv/venv/bin/activate; python /home/ubuntu/venv/manage.py migrate'
   - name: dados iniciais do DB
