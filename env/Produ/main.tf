@@ -14,4 +14,5 @@ module "aws-prod"{
     minimo = 1
     maximo = 10
     name_escalonamento = "Prod"
+    producao = true
 }

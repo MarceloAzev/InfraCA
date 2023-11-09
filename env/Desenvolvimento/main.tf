@@ -14,4 +14,5 @@ module "aws-dev"{
     minimo = 0
     maximo = 1
     name_escalonamento = "Dev"
+    producao = false
 }
